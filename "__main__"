@@ -1,0 +1,5 @@
+from teste2 import ValidarCPF
+
+cpf = input('Digite seu cpf: ')
+cpf = ValidarCPF(cpf)
+cpf.valida_cpf()
