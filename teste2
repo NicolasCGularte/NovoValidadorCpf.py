@@ -85,8 +85,7 @@ class ValidarCPF:
             valida_segundo_numero = segundo_Digitocerto
         return valida_segundo_numero
     
-
-    def valida_cpf(self):
+    def valida_cpf(self, cpf):
        """
             Este é o método principal que chama os outros métodos e realiza
             o processo de validação. Imprime "CPF VÁLIDO" se o número do CPF
@@ -108,13 +107,26 @@ class ValidarCPF:
        else:
            print(' CPF INVÁLIDO .')
 
+    def salva_resultados(self):
 
-           
-cpf = input('Digite seu cpf: ')
-cpf = ValidarCPF(cpf)
-cpf.valida_cpf()
+        """
+            A função "salva_resultados" recebe um objeto self como entrada e executa as seguintes ações:
+            chama o método "valida_cpf" no objeto self e armazena o resultado na variável "resultado".
+            Se a variável "resultado" for true (ou seja, avaliada como True), a função anexa o atributo 
+            "cpf" do objeto self a um arquivo chamado "resultados.txt".
+            Se a variável "resultado" for falsa (ou seja, avaliada como False), 
+            a função anexa a representação de string da variável "resultado" a um arquivo chamado "erros.log".
+
+        """
+
+        resultado = self.valida_cpf()
+        if resultado:
+            with open('resultados.txt', 'a') as arquivo:
+                arquivo.write(self.cpf + '\n')
+        else:
+            with open( 'erros.log', 'a') as arquivo: 
+                arquivo.write(str(resultado) + '\n')
 
 
-                 
 
-
+       
