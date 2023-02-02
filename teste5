@@ -1,0 +1,31 @@
+import datetime
+from Validador_Cpf import ValidarCPF
+
+
+while True:
+    try:
+        cpf = input("Informe o CPF [Ou sair para finalizar!] :")
+        if cpf.lower() == 'sair':
+            break
+        if not cpf.isdigit():
+            raise ValueError("O CPF deve conter somente números.")
+        if len(cpf) != 11:
+            with open( 'erros.log', 'a',encoding='UTF-8') as arquivo:
+                agora = datetime.datetime.now()
+                data_str = agora.strftime('%d/%m/%Y %H:%M')
+                arquivo.write(f'{cpf} {data_str} Erro: O CPF deve conter 11 números.\n')
+            raise ValueError("O CPF deve conter 11 números.")
+        if len(set(cpf)) == 1:
+            with open( 'erros.log', 'a',encoding='UTF-8') as arquivo:
+                agora = datetime.datetime.now()
+                data_str = agora.strftime('%d/%m/%Y %H:%M')
+                arquivo.write(f'{cpf} {data_str} Erro: O CPF não pode conter todos os números iguais.\n')
+            raise ValueError("O CPF não pode conter todos os números iguais.")
+    except ValueError as error:
+        print(f"Erro: {error}")
+    else:
+        valido = "CPF Válido!"
+        with open('resultados.txt', 'a', encoding='UTF-8') as arquivo:
+            agora = datetime.datetime.now()
+            data_str = agora.strftime('%d/%m/%Y %H:%M')
+            arquivo.write(f'Cpf = {cpf} {valido} {data_str}\n')
